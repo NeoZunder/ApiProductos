@@ -1,0 +1,16 @@
+# Ignorar node_modules en ambas carpetas
+frontend/node_modules/
+backend/node_modules/
+
+# Ignorar archivos de configuración de IDE (ejemplo con VS Code)
+.vscode/
+.idea/
+
+# Ignorar archivos del sistema (ejemplo en macOS)
+.DS_Store
+
+# Ignorar archivos de logs
+*.log
+
+# Ignorar archivos de entorno
+.env
