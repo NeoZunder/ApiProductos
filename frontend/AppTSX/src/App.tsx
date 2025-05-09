@@ -3,8 +3,25 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+
+import { useEffect } from 'react'
+import getAllTrabajadores from './Apis/APITrabajadores'
+
+
+
 function App() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const apiUrl = `${import.meta.env.VITE_API_URL}/trabajadores/getAllTrabajadores`;
+    getAllTrabajadores(apiUrl)
+    .then((data) => {
+      console.log('Trabajadores:', data);
+    })
+    .catch((error) => {
+        console.error('Error fetching trabajadores:', error);
+      });
+  }, [])
 
   return (
     <>
