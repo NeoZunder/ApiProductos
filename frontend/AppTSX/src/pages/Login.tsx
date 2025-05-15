@@ -16,59 +16,68 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
+const loginBtn = document.getElementById("login-button");
+
+    loginBtn?.addEventListener("click", () => {
+
+    });
+
+
 export default function Login() {
     return <>
-    <section className="h-screen flex items-center justify-center flex-col">
-        <h1 className="m-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Login</h1>
-        
-        <Tabs defaultValue="account" className="w-[400px]">
+    <section className="h-screen flex items-center justify-center flex-col bg-[url(./assets/bk.jpg)] bg-cover bg-center grayscale-80">
+        <Tabs defaultValue="account" className=" backdrop-blur-xs w-[300px] sm:w-[400px]">
             <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
+                <TabsTrigger value="account">Sign In</TabsTrigger>
+                <TabsTrigger value="password">Sign Up</TabsTrigger>
             </TabsList>
             <TabsContent value="account">
                 <Card>
                 <CardHeader>
                     <CardTitle>Account</CardTitle>
                     <CardDescription>
-                    Make changes to your account here. Click save when you're done.
+                    Login to your account
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                     <div className="space-y-1">
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" defaultValue="Pedro Duarte" />
-                    </div>
-                    <div className="space-y-1">
                     <Label htmlFor="username">Username</Label>
                     <Input id="username" defaultValue="@peduarte" />
                     </div>
+                    <div className="space-y-1">
+                    <Label htmlFor="password">Password</Label>
+                    <Input id="password" type="password"  defaultValue="" />
+                    </div>
                 </CardContent>
                 <CardFooter>
-                    <Button>Save changes</Button>
+                    <Button id="login-button" className="w-60 block mx-auto sm:w-80">Login</Button>
                 </CardFooter>
                 </Card>
             </TabsContent>
             <TabsContent value="password">
                 <Card>
                 <CardHeader>
-                    <CardTitle>Password</CardTitle>
+                    <CardTitle>Register</CardTitle>
                     <CardDescription>
-                    Change your password here. After saving, you'll be logged out.
+                    create an account
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                     <div className="space-y-1">
-                    <Label htmlFor="current">Current password</Label>
-                    <Input id="current" type="password" />
+                    <Label htmlFor="username">Username</Label>
+                    <Input id="username" defaultValue="@peduarte" />
                     </div>
                     <div className="space-y-1">
-                    <Label htmlFor="new">New password</Label>
-                    <Input id="new" type="password" />
+                    <Label htmlFor="password">Password</Label>
+                    <Input id="password" type="password"  defaultValue="" />
+                    </div>
+                    <div className="space-y-1">
+                    <Label htmlFor="re-password">Repeat Password</Label>
+                    <Input id="re-password" type="password"  defaultValue="" />
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button>Save password</Button>
+                    <Button className="w-60 block mx-auto sm:w-80 ">Register</Button>
                 </CardFooter>
                 </Card>
             </TabsContent>
