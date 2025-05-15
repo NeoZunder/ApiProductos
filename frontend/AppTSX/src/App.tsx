@@ -4,18 +4,30 @@ import Home from "@/pages/Home"
 import Products from "@/pages/Products"
 import Login from "@/pages/Login"
 import { Navbar } from "@/components/ui/navbar"
+import { useLocation } from "react-router-dom"
 
-function App() {
+function Layout() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/login";
+
   return (
-    <BrowserRouter>
-      <Navbar />
+    <>
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Products" element={<Products />} />
         <Route path="/Login" element={<Login />} />
       </Routes>
-    </BrowserRouter>
-  )
+    </>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  );
+}
+
+export default App;
