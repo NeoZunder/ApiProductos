@@ -1,6 +1,7 @@
 import express from 'express';
 import { connectDB, sql } from '../src/config.js'; // Asegúrate de que la ruta sea correcta
 import rateLimit from 'express-rate-limit';
+import bcrypt from 'bcrypt';
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 1000, // 15 segundos
@@ -17,8 +18,49 @@ router.post('/', (req, res) => {
 router.post('/signin', loginLimiter, async (req, res) => {
     const { username, password } = req.body;
 
-    console.log("Username:", username);
-    console.log("Password:", password);
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
+    }
+
+    let pool;
+    try {
+        pool = await connectDB();
+
+        // Primero traemos el usuario por username
+        const result = await pool.request()
+            .input('username', sql.VarChar, username)
+            .query(`
+                SELECT * FROM Administradores
+                WHERE username COLLATE Latin1_General_CS_AS = @username
+            `);
+
+        if (result.recordset.length === 0) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+
+        const user = result.recordset[0];
+        const hashedPassword = user.password; // hash almacenado en la DB
+
+        // Ahora comparamos el password con el hash
+        const isMatch = await bcrypt.compare(password, hashedPassword);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+
+        // Si llegó acá, contraseña correcta
+        return res.status(200).json({ message: "Login successful" });
+
+    } catch (error) {
+        console.error("Login error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    } finally {
+        if (pool) await pool.close();
+    }
+});
+
+router.post('/signup', async (req, res) => {
+    const { username, password } = req.body; // solo recibimos estos dos
 
     if (!username || !password) {
         return res.status(400).json({ message: "Username and password are required" });
@@ -27,27 +69,29 @@ router.post('/signin', loginLimiter, async (req, res) => {
     let pool;
     try {
         pool = await connectDB();
-        const result = await pool.request()
+
+        const userExists = await pool.request()
             .input('username', sql.VarChar, username)
-            .input('password', sql.VarChar, password)
-            .query(`
-                SELECT * FROM Administradores
-                WHERE username COLLATE Latin1_General_CS_AS = @username 
-                AND password COLLATE Latin1_General_CS_AS = @password
-            `);
+            .query('SELECT * FROM Administradores WHERE username = @username');
 
-        console.log("Result:", result.recordset[0]);
-
-        if (result.recordset.length > 0) {
-            return res.status(200).json({ message: "Login successful" });
-        } else {
-            return res.status(401).json({ message: "Invalid username or password" });
+        if (userExists.recordset.length > 0) {
+            return res.status(409).json({ message: "Username already exists" });
         }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await pool.request()
+            .input('username', sql.VarChar, username)
+            .input('password', sql.VarChar, hashedPassword)
+            .query('INSERT INTO Administradores (username, password) VALUES (@username, @password)');
+
+        return res.status(201).json({ message: "User registered successfully" });
+
     } catch (error) {
-        console.error("Login error:", error);
+        console.error("Register error:", error);
         return res.status(500).json({ message: "Internal server error" });
     } finally {
-        if (pool) await pool.close(); // importante
+        if (pool) await pool.close();
     }
 });
 

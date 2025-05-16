@@ -49,6 +49,44 @@ const functionLogin = async () => {
 
 }
 
+const functionRegister = async () => {
+  const username = (document.getElementById("reg-username") as HTMLInputElement)?.value;
+  const password = (document.getElementById("reg-password") as HTMLInputElement)?.value;
+  const rePassword = (document.getElementById("reg-re-password") as HTMLInputElement)?.value;
+
+  if (!username || !password || !rePassword) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  if (password !== rePassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/login/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("User registered successfully, you can now login");
+      // Opcional: limpiar inputs o cambiar tab a login
+    } else {
+      alert(data.message || "Registration failed");
+    }
+  } catch (error) {
+    console.error("Error during registration:", error);
+    alert("There was an error connecting to the server.");
+  }
+};
+
 export default function Login() {
     return <>
     <section className="h-screen flex items-center justify-center flex-col bg-[url(./assets/bk.jpg)] bg-cover bg-center grayscale-80">
@@ -94,20 +132,20 @@ export default function Login() {
                 </CardHeader>
                 <CardContent className="space-y-2">
                     <div className="space-y-1">
-                    <Label htmlFor="username">Username</Label>
-                    <Input id="username" defaultValue="@peduarte" />
+                    <Label htmlFor="reg-username">Username</Label>
+                    <Input id="reg-username" defaultValue="@peduarte" />
                     </div>
                     <div className="space-y-1">
-                    <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password"  defaultValue="" />
+                    <Label htmlFor="reg-password">Password</Label>
+                    <Input id="reg-password" type="password"  defaultValue="" />
                     </div>
                     <div className="space-y-1">
-                    <Label htmlFor="re-password">Repeat Password</Label>
-                    <Input id="re-password" type="password"  defaultValue="" />
+                    <Label htmlFor="reg-re-password">Repeat Password</Label>
+                    <Input id="reg-re-password" type="password"  defaultValue="" />
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button className="w-60 block mx-auto sm:w-80 ">Register</Button>
+                    <Button className="w-60 block mx-auto sm:w-80" onClick={functionRegister} >Register</Button>
                 </CardFooter>
                 </Card>
             </TabsContent>
