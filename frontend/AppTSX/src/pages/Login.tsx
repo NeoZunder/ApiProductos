@@ -1,27 +1,53 @@
 import { Button } from "@/components/ui/button"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
 } from "@/components/ui/tabs"
 
-const loginBtn = document.getElementById("login-button");
+const functionLogin = async () => {  
+    const username = (document.getElementById("username") as HTMLInputElement).value;
+    const password = (document.getElementById("password") as HTMLInputElement).value;
 
-    loginBtn?.addEventListener("click", () => {
+    if (!username || !password) {
+        console.error("Please fill in all fields");
+        return;
+    }
 
+    try {
+    const response = await fetch("/api/login/signin", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
     });
 
+    const data = await response.json();
+
+    if (response.status === 200) {
+        console.log(data.message);
+        window.location.href = "/home";
+    } else {
+        console.error(data.message || "Login failed");
+    }
+    } catch (error) {
+        console.error("Error during login:", error);
+        alert("There was an error connecting to the server.");
+    }
+
+}
 
 export default function Login() {
     return <>
@@ -50,7 +76,11 @@ export default function Login() {
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button id="login-button" className="w-60 block mx-auto sm:w-80">Login</Button>
+                    <Button
+                        className="w-60 block mx-auto sm:w-80"
+                        onClick={functionLogin}>
+                        Login
+                    </Button>
                 </CardFooter>
                 </Card>
             </TabsContent>
