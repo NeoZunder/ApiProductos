@@ -100,17 +100,17 @@ export default function Login() {
                 <CardHeader>
                     <CardTitle>Account</CardTitle>
                     <CardDescription>
-                    Login to your account
+                    Login To Your Account
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                     <div className="space-y-1">
                     <Label htmlFor="username">Username</Label>
-                    <Input id="username" defaultValue="@peduarte" />
+                    <Input id="username" defaultValue=""  placeholder="" />
                     </div>
                     <div className="space-y-1">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password"  defaultValue="" />
+                    <Input id="password" type="password"  defaultValue="" placeholder=""/>
                     </div>
                 </CardContent>
                 <CardFooter>
@@ -127,17 +127,17 @@ export default function Login() {
                 <CardHeader>
                     <CardTitle>Register</CardTitle>
                     <CardDescription>
-                    create an account
+                    Create Your Account
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                     <div className="space-y-1">
                     <Label htmlFor="reg-username">Username</Label>
-                    <Input id="reg-username" defaultValue="@peduarte" />
+                    <Input id="reg-username" defaultValue="" placeholder="" />
                     </div>
                     <div className="space-y-1">
                     <Label htmlFor="reg-password">Password</Label>
-                    <Input id="reg-password" type="password"  defaultValue="" />
+                    <Input id="reg-password" type="password"  defaultValue="" placeholder="" />
                     </div>
                     <div className="space-y-1">
                     <Label htmlFor="reg-re-password">Repeat Password</Label>
