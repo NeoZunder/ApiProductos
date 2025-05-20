@@ -18,6 +18,30 @@ import {
 
 import {functionLogin, functionRegister} from "@/Apis/AuthLogin"
 
+const buttonLogin = async () => {
+    const loginMsg = document.querySelector(".login-msg") as HTMLDivElement;
+    const respuesta = await functionLogin();
+    
+    if (respuesta) {
+        loginMsg.innerHTML = `<p>${respuesta}</p>`;
+        setTimeout(() => {
+        loginMsg.innerHTML = "";
+        }, 3000);
+    }
+};
+
+const buttonRegister =  async () => {
+    const registerMsg = document.querySelector(".register-msg") as HTMLDivElement;
+    const respuesta = await functionRegister();
+    
+    if (respuesta) {
+        registerMsg.innerHTML = `<p>${respuesta}</p>`;
+        setTimeout(() => {
+        registerMsg.innerHTML = "";
+        }, 3000);
+    }
+};
+
 export default function Login() {
     return <>
     <section className="h-screen flex items-center justify-center flex-col bg-[url(./assets/bk.jpg)] bg-cover bg-center grayscale-80">
@@ -47,14 +71,16 @@ export default function Login() {
                 <CardFooter>
                     <Button
                         className="w-60 block mx-auto sm:w-80"
-                        onClick={functionLogin}>
+                        onClick={buttonLogin}>
                         Login
                     </Button>
                 </CardFooter>
+                <div className="login-msg space-y-1 w-60 block mx-auto sm:w-80 flex items-center justify-center">
+                </div>
                 </Card>
             </TabsContent>
             <TabsContent value="password">
-                <Card>
+                <Card> 
                 <CardHeader>
                     <CardTitle>Register</CardTitle>
                     <CardDescription>
@@ -76,8 +102,10 @@ export default function Login() {
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button className="w-60 block mx-auto sm:w-80" onClick={functionRegister} >Register</Button>
+                    <Button className="w-60 block mx-auto sm:w-80 " onClick={buttonRegister} >Register</Button>
                 </CardFooter>
+                <div className="register-msg space-y-1 w-60 block mx-auto sm:w-80 flex items-center justify-center">
+                </div>
                 </Card>
             </TabsContent>
         </Tabs> 

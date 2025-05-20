@@ -3,8 +3,7 @@ const functionLogin = async () => {
     const password = (document.getElementById("password") as HTMLInputElement).value;
 
     if (!username || !password) {
-        console.error("Please fill in all fields");
-        return;
+        return ("Please fill in all fields");
     }
 
     try {
@@ -22,7 +21,7 @@ const functionLogin = async () => {
         console.log(data.message);
         window.location.href = "/home";
     } else {
-        console.error(data.message || "Login failed");
+        return data.message || "Login failed";
     }
     } catch (error) {
         console.error("Error during login:", error);
@@ -37,13 +36,12 @@ const functionRegister = async () => {
   const rePassword = (document.getElementById("reg-re-password") as HTMLInputElement)?.value;
 
   if (!username || !password || !rePassword) {
-    alert("Please fill in all fields");
-    return;
+    return ("Please fill in all fields");
+    
   }
 
   if (password !== rePassword) {
-    alert("Passwords do not match");
-    return;
+    return ("Passwords do not match");
   }
 
   try {
@@ -61,7 +59,7 @@ const functionRegister = async () => {
       alert("User registered successfully, you can now login");
       // Opcional: limpiar inputs o cambiar tab a login
     } else {
-      alert(data.message || "Registration failed");
+      return (data.message || "Registration failed");
     }
   } catch (error) {
     console.error("Error during registration:", error);
