@@ -1,7 +1,7 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
+import  { PrismaClient }  from '@prisma/client';
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -24,7 +24,7 @@ router.post('/signin', loginLimiter, async (req, res) => {
   }
 
   try {
-    const user = await prisma.administrador.findUnique({
+    const user = await prisma.administradores.findUnique({
       where: { username },
     });
 
@@ -54,7 +54,7 @@ router.post('/signup', async (req, res) => {
   }
 
   try {
-    const existingUser = await prisma.administrador.findUnique({
+    const existingUser = await prisma.administradores.findUnique({
       where: { username },
     });
 
@@ -64,7 +64,7 @@ router.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await prisma.administrador.create({
+    await prisma.administradores.create({
       data: {
         username,
         password: hashedPassword,

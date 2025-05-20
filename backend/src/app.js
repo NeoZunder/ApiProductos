@@ -4,6 +4,7 @@ import morgan from "morgan";
 import trabajadoresRouter from "../routes/trabajadores.js"; // Importamos el router de trabajadores
 import productosRouter from "../routes/productos.js"; // Importamos el router de productos
 import loginRouter from "../routes/login.js"; // Importamos el router de productos
+import authRouter from "../routes/auth.js"; // Importamos el router de productos
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(morgan('dev')) //Colores y log liviano: método, URL, status, tiempo, ta
 app.use('/trabajadores',trabajadoresRouter) // Usar el router de trabajadores para manejar las rutas relacionadas con productos
 app.use('/productos',productosRouter) // Usar el router de productos para manejar las rutas relacionadas con productos
 app.use('/login',loginRouter)
+app.use('/auth',authRouter)
 
 export {app};
   

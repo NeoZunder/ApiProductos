@@ -8,7 +8,7 @@ const functionLogin = async () => {
     }
 
     try {
-    const response = await fetch("/api/login/signin", {
+    const response = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
@@ -47,7 +47,7 @@ const functionRegister = async () => {
   }
 
   try {
-    const response = await fetch("/api/login/signup", {
+    const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
