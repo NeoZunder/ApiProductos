@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import authRouter from "../routes/auth.js"; // Importamos el router de productos
+import authRouter from "./routes/auth.js"; // Importamos el router de productos
 
 const app = express()
 
