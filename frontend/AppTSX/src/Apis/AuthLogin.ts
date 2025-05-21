@@ -34,8 +34,10 @@ const functionRegister = async () => {
   const username = (document.getElementById("reg-username") as HTMLInputElement)?.value;
   const password = (document.getElementById("reg-password") as HTMLInputElement)?.value;
   const rePassword = (document.getElementById("reg-re-password") as HTMLInputElement)?.value;
+  const email = (document.getElementById("reg-email") as HTMLInputElement)?.value;
 
-  if (!username || !password || !rePassword) {
+  if (!username || !password || !rePassword || !email) {
+    // Si alguno de los campos está vacío, muestra un mensaje de error
     return ("Please fill in all fields");
     
   }
@@ -50,7 +52,7 @@ const functionRegister = async () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password, email })
     });
 
     const data = await response.json();

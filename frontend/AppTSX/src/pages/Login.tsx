@@ -93,6 +93,10 @@ export default function Login() {
                     <Input id="reg-username" defaultValue="" placeholder="" />
                     </div>
                     <div className="space-y-1">
+                    <Label htmlFor="reg-email">Email</Label>
+                    <Input id="reg-email" defaultValue="" placeholder="" />
+                    </div>
+                    <div className="space-y-1">
                     <Label htmlFor="reg-password">Password</Label>
                     <Input id="reg-password" type="password"  defaultValue="" placeholder="" />
                     </div>

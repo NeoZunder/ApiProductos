@@ -10,6 +10,7 @@ datasource db {
 model Administradores {
   id        Int       @id(map: "PK__Administ__3213E83F9D273C7E") @default(autoincrement())
   username  String    @unique(map: "UQ__Administ__F3DBC572269E0199") @db.VarChar(50)
+  email      String    @unique @db.VarChar(255) 
   password  String    @db.VarChar(255)
   creado_en DateTime? @default(now(), map: "DF__Administr__cread__17036CC0") @db.DateTime
 }

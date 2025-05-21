@@ -47,9 +47,9 @@ router.post('/signin', loginLimiter, async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
 
-  if (!username || !password) {
+  if (!username || !password || !email) {
     return res.status(400).json({ message: "Username and password are required" });
   }
 
@@ -68,6 +68,7 @@ router.post('/signup', async (req, res) => {
       data: {
         username,
         password: hashedPassword,
+        email,
       },
     });
 
