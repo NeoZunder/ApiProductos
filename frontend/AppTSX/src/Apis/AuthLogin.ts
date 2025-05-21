@@ -7,7 +7,7 @@ const functionResetPassword = async() => {
     }
 
     try {
-      const response = await fetch("/api/auth/resetPassword", {
+      const response = await fetch("/api/email/resetPassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
