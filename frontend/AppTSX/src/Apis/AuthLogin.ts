@@ -1,3 +1,28 @@
+
+const functionResetPassword = async() => {
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+
+    if (!email) {
+      return ("Please enter your email")
+    }
+
+    try {
+      const response = await fetch("/api/auth/resetPassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      })
+
+      const data = await response.json()
+      return data.message || "Reset password request failed"
+    } catch (error) {
+
+      return ("There was an error. Please try again.")
+    }
+}
+
 const functionLogin = async () => {  
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
@@ -69,4 +94,4 @@ const functionRegister = async () => {
   }
 };
 
-export { functionLogin, functionRegister };
+export { functionLogin, functionRegister, functionResetPassword };

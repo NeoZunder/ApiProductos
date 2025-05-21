@@ -80,4 +80,32 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+
+router.post('/resetPassword', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: "Email is required" });
+  }
+
+  try {
+    const user = await prisma.administradores.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Aquí iría la lógica para enviar el correo de restablecimiento de contraseña
+
+    return res.status(200).json({ message: "Password reset email sent" });
+
+  } catch (error) {
+    console.error("Reset password error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+
+});
+
 export default router;

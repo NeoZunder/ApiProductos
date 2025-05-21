@@ -3,8 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "@/pages/Home"
 import Products from "@/pages/Products"
 import Login from "@/pages/Login"
+import ResetPassword from "@/pages/ResetPassword"
+
 import { Navbar } from "@/components/ui/navbar"
 import { useLocation } from "react-router-dom"
+
 
 function Layout() {
   const location = useLocation();
@@ -12,11 +15,12 @@ function Layout() {
 
   return (
     <>
-      {!hideNavbar && <Navbar />}
+      {!hideNavbar && <Navbar />} {/* Show Navbar on all pages except Login */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Products" element={<Products />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </>
   );
