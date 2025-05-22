@@ -67,6 +67,7 @@ export default function Login() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password"  defaultValue="" placeholder=""/>
                     </div>
+                    <a className="text-blue-700 underline font-bold text-xs" href="http://localhost:5173/reset-password">Forgot Your Password?</a>
                 </CardContent>
                 <CardFooter>
                     <Button

@@ -1,4 +1,20 @@
 
+const functionSaveNewPassword = async function functionSaveNewPassword(token: string, password: string, repeatPassword: string) {
+  try {
+    const res = await fetch("api/email/forgotPassword", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, password, repeatPassword }),
+    });
+
+    const data = await res.json();
+    return data.message;
+  } catch (error) {
+    console.error("Error al guardar nueva contraseña:", error);
+    return "Error al actualizar la contraseña.";
+  }
+}
+
 const functionResetPassword = async() => {
     const email = (document.getElementById("email") as HTMLInputElement).value;
 
@@ -94,4 +110,4 @@ const functionRegister = async () => {
   }
 };
 
-export { functionLogin, functionRegister, functionResetPassword };
+export { functionLogin, functionRegister, functionResetPassword, functionSaveNewPassword };

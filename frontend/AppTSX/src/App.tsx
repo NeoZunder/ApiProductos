@@ -4,6 +4,8 @@ import Home from "@/pages/Home"
 import Products from "@/pages/Products"
 import Login from "@/pages/Login"
 import ResetPassword from "@/pages/ResetPassword"
+import ForgotPassword from "./pages/ForgotPassword"
+
 
 import { Navbar } from "@/components/ui/navbar"
 import { useLocation } from "react-router-dom"
@@ -21,6 +23,7 @@ function Layout() {
         <Route path="/Products" element={<Products />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
       </Routes>
     </>
   );

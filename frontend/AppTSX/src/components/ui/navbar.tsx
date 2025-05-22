@@ -8,6 +8,7 @@ export function Navbar() {
       <Link to="/products">Products</Link>
       <Link to="/login">Login</Link>
       <Link to="/reset-password">Reset Password</Link>
+      <Link to="/ForgotPassword">Forgot Password</Link>
     </nav>
   )
 }
