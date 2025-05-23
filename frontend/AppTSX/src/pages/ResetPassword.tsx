@@ -27,7 +27,7 @@ const buttonResetPassword = async () => {
 
 export default function ResetPassword(){
     return (
-    <section className="h-screen flex items-center justify-center flex-col bg-[url(./assets/bk.jpg)] bg-cover bg-center grayscale-80">
+    <section className="h-screen flex items-center justify-center flex-col bg-[url(./assets/bk.jpg)] bg-cover bg-center">
       <Card className="w-[300px] sm:w-[400px] backdrop-blur-xs">
         <CardHeader>
           <CardTitle>Reset Password</CardTitle>

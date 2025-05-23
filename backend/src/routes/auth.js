@@ -1,6 +1,7 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import bcrypt from 'bcrypt';
+import { userExists } from '../services/validations.js';
 import  { PrismaClient }  from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -60,6 +61,9 @@ router.post('/signup', async (req, res) => {
 
     if (existingUser) {
       return res.status(409).json({ message: "Username already exists" });
+    }
+    if (userExists){
+      return res.status(409).json({message: "Email already exists"});
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
