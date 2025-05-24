@@ -9,6 +9,8 @@ import emailRoutes from "./routes/email.js"; // Importamos el router de email
 
 const app = express()
 
+app.set('trust proxy', 1); //???
+
 // Asi se realiza la llamada a la API desde el frontend
 //http://localhost:5173/api/trabajadores
 //http://localhost:5173/api/login 
