@@ -19,7 +19,7 @@ function Layout() {
     <>
       {!hideNavbar && <Navbar />} {/* Show Navbar on all pages except Login */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Products" element={<Products />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />

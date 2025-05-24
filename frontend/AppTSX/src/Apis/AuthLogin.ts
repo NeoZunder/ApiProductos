@@ -62,7 +62,7 @@ const functionLogin = async () => {
 
     if (response.status === 200) {
         console.log(data.message);
-        window.location.href = "/home";
+        window.location.href = "/Home";
     } else {
         return data.message || "Login failed";
     }
