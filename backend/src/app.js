@@ -13,7 +13,7 @@ const app = express()
 //http://localhost:5173/api/trabajadores
 //http://localhost:5173/api/login 
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://api-productos-weld.vercel.app/'] // permití solo tu frontend
+    origin: ['http://localhost:5173', 'https://api-productos-weld.vercel.app'] // permití solo tu frontend
   })); // Configuración de CORS para permitir solicitudes desde el frontend
 
 app.use(express.json())
