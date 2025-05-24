@@ -68,7 +68,7 @@ export default function Login() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password"  defaultValue="" placeholder=""/>
                     </div>
-                    <a className="text-blue-700 underline font-bold text-xs" href={`${FRONTEND_URL}/reset-password`}>Forgot Your Password?</a>
+                    <a className="text-blue-700 underline font-bold text-xs" href={`https://api-productos-weld.vercel.app/reset-password`}>Forgot Your Password?</a>
                 </CardContent>
                 <CardFooter>
                     <Button
