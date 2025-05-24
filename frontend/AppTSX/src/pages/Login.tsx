@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/tabs"
 
 import {functionLogin, functionRegister} from "@/Apis/AuthLogin"
-const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173";
 
 const buttonLogin = async () => {
     const loginMsg = document.querySelector(".login-msg") as HTMLDivElement;
