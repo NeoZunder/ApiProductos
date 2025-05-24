@@ -38,7 +38,7 @@ router.post('/resetPassword', async (req, res) => {
   const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '15m' });
 
   // 🔗 Link con token incluido
-  const link = `http://localhost:5173/ForgotPassword?token=${token}`;
+  const link = `https://api-productos-weld.vercel.app/ForgotPassword?token=${token}`;
 
   const mailOptions = {
     from: `"Mi App" <${process.env.EMAIL_USER}>`,
