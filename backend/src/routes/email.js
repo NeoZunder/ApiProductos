@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import nodemailer from 'nodemailer';
-import { userExists } from '../services/validations.js';
+// import { userExists } from '../utils/validations.js';
+import { userExists } from '../utils/validations.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import  { PrismaClient }  from '@prisma/client';

@@ -20,10 +20,10 @@ import {functionLogin, functionRegister} from "@/Apis/AuthLogin"
 
 const buttonLogin = async () => {
     const loginMsg = document.querySelector(".login-msg") as HTMLDivElement;
-    const respuesta = await functionLogin();
+    const res = await functionLogin();
     
-    if (respuesta) {
-        loginMsg.innerHTML = `<p>${respuesta}</p>`;
+    if (res) {
+        loginMsg.innerHTML = `<p>${res}</p>`;
         setTimeout(() => {
         loginMsg.innerHTML = "";
         }, 3000);
@@ -32,10 +32,10 @@ const buttonLogin = async () => {
 
 const buttonRegister =  async () => {
     const registerMsg = document.querySelector(".register-msg") as HTMLDivElement;
-    const respuesta = await functionRegister();
+    const res = await functionRegister();
     
-    if (respuesta) {
-        registerMsg.innerHTML = `<p>${respuesta}</p>`;
+    if (res) {
+        registerMsg.innerHTML = `<p>${res}</p>`;
         setTimeout(() => {
         registerMsg.innerHTML = "";
         }, 3000);

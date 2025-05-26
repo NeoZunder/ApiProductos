@@ -1,8 +1,16 @@
-import express from 'express';
-import rateLimit from 'express-rate-limit';
-import bcrypt from 'bcrypt';
-import { userExists } from '../services/validations.js';
-import  { PrismaClient }  from '@prisma/client';
+import express from "express";
+import rateLimit from "express-rate-limit";
+import bcrypt from "bcrypt";
+import {
+  userExists,
+  isValidEmail,
+  isUsernameTaken,
+  isStrongPassword,
+  hasEmptyFields,
+  doPasswordsMatch,
+  
+} from "../utils/validations.js";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -10,21 +18,21 @@ const router = express.Router();
 const loginLimiter = rateLimit({
   windowMs: 15 * 1000,
   max: 3,
-  message: { message: "Demasiados intentos, esperá un poco." }
+  message: { message: "Too many attempts, please wait a moment." },
 });
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   res.json({ message: "Login route" });
 });
 
-router.post('/signin', loginLimiter, async (req, res) => {
+router.post("/signin", loginLimiter, async (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required" });
-  }
-
   try {
+    if (hasEmptyFields(username, password)) {
+      return res.status(400).json({ message: "Please fill in all fields" });
+    }
+
     const user = await prisma.administradores.findUnique({
       where: { username },
     });
@@ -40,29 +48,45 @@ router.post('/signin', loginLimiter, async (req, res) => {
     }
 
     return res.status(200).json({ message: "Login successful" });
-
   } catch (error) {
     console.error("Login error:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 });
 
-router.post('/signup', async (req, res) => {
-  const { username, password, email } = req.body;
-
-  if (!username || !password || !email) {
-    return res.status(400).json({ message: "Username and password are required" });
-  }
-
-  
+router.post("/signup", async (req, res) => {
+  const { username, password, rePassword, email } = req.body;
 
   try {
-    const existingUser = await prisma.administradores.findUnique({
-      where: { username },
-    });
+    if (hasEmptyFields(username, password, rePassword, email)) {
+      return res.status(400).json({ message: "Please fill in all fields" });
+    }
 
-    if (existingUser) {
+    if (await isUsernameTaken(username)) {
       return res.status(409).json({ message: "Username already exists" });
+    }
+
+    if (await userExists(email)) {
+      return res.status(409).json({ message: "Email already exists" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res
+        .status(400)
+        .json({ message: "Email format: example@domain.com " });
+    }
+
+    if (!doPasswordsMatch(password, rePassword)) {
+      return res.status(400).json({ message: `Passwords do not match` });
+    }
+
+    if (!isStrongPassword(password)) {
+      return res.status(400).json({
+        message: `Password must be at least 8 characters long, 
+        contain at least one uppercase letter, 
+        one lowercase letter, 
+        and one number`,
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -76,7 +100,6 @@ router.post('/signup', async (req, res) => {
     });
 
     return res.status(201).json({ message: "User registered successfully" });
-
   } catch (error) {
     console.error("Register error:", error);
     return res.status(500).json({ message: "Internal server error" });

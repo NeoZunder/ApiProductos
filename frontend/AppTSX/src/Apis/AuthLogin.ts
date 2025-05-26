@@ -12,8 +12,8 @@ const functionSaveNewPassword = async function functionSaveNewPassword(token: st
     const data = await res.json();
     return data.message;
   } catch (error) {
-    console.error("Error al guardar nueva contraseña:", error);
-    return "Error al actualizar la contraseña.";
+    console.error("Error saving new password:", error);
+    return "Error updating the password. Please try again.";
   }
 }
 
@@ -82,7 +82,6 @@ const functionRegister = async () => {
   if (!username || !password || !rePassword || !email) {
     // Si alguno de los campos está vacío, muestra un mensaje de error
     return ("Please fill in all fields");
-    
   }
 
   if (password !== rePassword) {
@@ -95,7 +94,7 @@ const functionRegister = async () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ username, password, email })
+      body: JSON.stringify({ username, password, rePassword, email })
     });
 
     const data = await response.json();
