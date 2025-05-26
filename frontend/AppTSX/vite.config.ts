@@ -19,15 +19,15 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      proxy: {
-        '/api': {
-          target: isDev
-            ? 'http://localhost:3000' // tu backend local
-            : 'https://apiproductos-8prf.onrender.com', // tu backend en producción
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
+      // proxy: {
+      //   '/api': {
+      //     target: isDev
+      //       ? 'http://localhost:3000' // tu backend local
+      //       : 'https://apiproductos-8prf.onrender.com', // tu backend en producción
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, ''),
+      //   },
+      // },
     },
   };
 });

@@ -3,7 +3,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const functionSaveNewPassword = async function functionSaveNewPassword(token: string, password: string, repeatPassword: string) {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/email/forgotPassword`, {
+    const res = await fetch(`${API_BASE_URL}/email/forgotPassword`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token, password, repeatPassword }),
@@ -25,7 +25,7 @@ const functionResetPassword = async() => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/email/resetPassword`, {
+      const response = await fetch(`${API_BASE_URL}/email/resetPassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -50,7 +50,7 @@ const functionLogin = async () => {
     }
 
     try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/signin`, {
+    const response = await fetch(`${API_BASE_URL}/auth/signin`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
@@ -90,7 +90,7 @@ const functionRegister = async () => {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+    const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
