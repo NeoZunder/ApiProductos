@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "dotenv -e .env.prod -- prisma generate --schema=prisma/schema.prod.prisma && node src/index.js",
     "build": "tsc",
-    "dev": "npx dotenv -e .env.dev -- prisma generate --schema=prisma/schema.dev.prisma && nodemon src/index.js"
+    "dev": "npx dotenv -e .env.dev -- prisma generate --schema=prisma/schema.dev.prisma && nodemon src/index.js",
+    "prod": "dotenv -e .env.prod -- prisma generate --schema=prisma/schema.prod.prisma && node src/index.js"
   },
   "author": "",
   "license": "ISC",
