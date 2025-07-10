@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "npx dotenv -e .env.dev -- prisma generate --schema=prisma/schema.dev.prisma && nodemon src/index.js",
-    "prod": "dotenv -e .env.prod -- prisma generate --schema=prisma/schema.prod.prisma && node src/index.js"
+    "prod": "dotenv -e .env.prod -- prisma generate --schema=prisma/schema.prod.prisma && node src/index.js",
+    "start": "dotenv -e .env.prod -- prisma generate --schema=prisma/schema.prod.prisma && node src/index.js"
   },
   "author": "",
   "license": "ISC",
