@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev":   "vite --mode dev",        
-    "prod": "vite build --mode prod",  
-    "preview": "vite preview --mode prod"
-  },
+  "dev": "vite --mode dev",
+  "prod": "vite build --mode prod",
+  "preview": "vite preview --mode prod",
+  "build": "vite build --mode prod"
+},
   "dependencies": {
     "@radix-ui/react-label": "^2.1.6",
     "@radix-ui/react-slot": "^1.2.2",
