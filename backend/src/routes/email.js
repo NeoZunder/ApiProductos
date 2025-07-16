@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
 
 router.get('/', (req, res) => {
 
-  res.json({ message: 'user and pass '+ user + ' ' + pass });
+  res.json({ message: 'user and pass '+ user + ' ' + pass + ' ' + `${process.env.FRONTEND_URL}` });
 });
 
 router.post('/resetPassword', async (req, res) => {
