@@ -101,7 +101,10 @@ const functionRegister = async () => {
 
     if (response.ok) {
       alert("User registered successfully, you can now login");
-      // Opcional: limpiar inputs o cambiar tab a login
+      (document.getElementById("reg-username") as HTMLInputElement).value = "";
+      (document.getElementById("reg-password") as HTMLInputElement).value = "";
+      (document.getElementById("reg-re-password") as HTMLInputElement).value = "";
+      (document.getElementById("reg-email") as HTMLInputElement).value = "";
     } else {
       return (data.message || "Registration failed");
     }

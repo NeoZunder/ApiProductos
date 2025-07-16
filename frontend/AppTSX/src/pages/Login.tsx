@@ -42,6 +42,10 @@ const buttonRegister =  async () => {
     }
 };
 
+const buttonForgetPassword = async () => {
+     window.location.href = "/reset-password";
+}
+
 export default function Login() {
     return <>
     <section className="h-screen flex items-center justify-center flex-col bg-[url(./assets/bk.jpg)] bg-cover bg-center">
@@ -67,7 +71,7 @@ export default function Login() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password"  defaultValue="" placeholder=""/>
                     </div>
-                    <a className="text-blue-700 underline font-bold text-xs" href={`https://api-productos-weld.vercel.app/reset-password`}>Forgot Your Password?</a>
+                    <p className="text-blue-700 underline font-bold text-xs" style={{ cursor: "pointer" }} onClick={buttonForgetPassword}>Forgot Your Password?</p>
                 </CardContent>
                 <CardFooter>
                     <Button

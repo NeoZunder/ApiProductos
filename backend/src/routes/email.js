@@ -39,7 +39,7 @@ router.post('/resetPassword', async (req, res) => {
   const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '15m' });
 
   // 🔗 Link con token incluido
-  const link = `?token=${token}`;
+  const link = `${process.env.FRONTEND_URL}/forgotPassword?token=${token}`;
 
   const mailOptions = {
     from: `"Mi App" <${process.env.EMAIL_USER}>`,
