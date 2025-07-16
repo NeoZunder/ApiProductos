@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config(); // Esto debe ir antes de usar process.env
 
 import express from "express";
 import cors from "cors";

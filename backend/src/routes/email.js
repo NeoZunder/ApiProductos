@@ -7,7 +7,8 @@ import jwt from 'jsonwebtoken';
 import  { PrismaClient }  from '@prisma/client';
 
 const router = Router();
-
+const user = process.env.EMAIL_USER;
+const pass = process.env.EMAIL_PASS;
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -17,11 +18,9 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const user = process.env.EMAIL_USER;
-const pass = process.env.EMAIL_PASS;
-
 router.get('/', (req, res) => {
-  res.json({ message: 'user and pass '+ user+ ' ' + pass });
+
+  res.json({ message: 'user and pass '+ user + ' ' + pass });
 });
 
 router.post('/resetPassword', async (req, res) => {
